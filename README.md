@@ -1,1 +1,3 @@
-# Joshua-Yeadon.github.io
+# Joshua Yeadon Portfolio
+
+Simple GitHub Pages portfolio using Jekyll.
