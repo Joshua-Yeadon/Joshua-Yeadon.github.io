@@ -1,0 +1,28 @@
+title: Joshua Yeadon Portfolio
+description: A concise design engineering portfolio of selected projects.
+url: ""
+baseurl: ""
+markdown: kramdown
+permalink: /blog/:title/
+
+author:
+  name: Joshua Yeadon
+  role: Design Engineer
+  email: hello@example.com
+  linkedin: https://www.linkedin.com/in/your-profile/
+
+collections:
+  posts:
+    output: true
+  projects:
+    output: false
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - README.md

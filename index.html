@@ -1,0 +1,129 @@
+---
+layout: default
+title: Home
+---
+
+{% assign sorted_projects = site.projects | sort: "order" %}
+
+<section class="intro" id="top" aria-labelledby="intro-title">
+  <div class="intro__content">
+    <p class="eyebrow">Joshua Yeadon &middot; Design Engineer</p>
+    <h1 id="intro-title">Final-year BSc Design Engineering student.</h1>
+    <p class="intro__text">
+      Selected work across mechanical design, CAD, prototyping, electronics, control systems,
+      test rigs, and FPV-related personal projects.
+    </p>
+    <div class="intro__actions" aria-label="Primary links">
+      <a href="#work">View portfolio</a>
+      <a href="#blog">Blog examples</a>
+    </div>
+  </div>
+  <a class="scroll-cue" href="#work" aria-label="Scroll to portfolio work">
+    <span>Scroll for portfolio</span>
+    <span aria-hidden="true">&darr;</span>
+  </a>
+</section>
+
+<main id="work" class="portfolio-shell" aria-labelledby="work-title">
+  <div class="portfolio-main">
+    <div class="section-heading section-heading--compact">
+      <p class="eyebrow">Selected work</p>
+      <h2 id="work-title">Portfolio boards</h2>
+      <p>
+        Short summaries from reports, prototypes, and personal builds. Images carry the detail;
+        expand a board for extra context without leaving the page.
+      </p>
+    </div>
+
+    {% for project in sorted_projects %}
+      <article id="project-{{ project.slug }}" class="portfolio-board">
+        <div class="portfolio-board__media">
+          <img src="{{ project.hero | relative_url }}" alt="{{ project.hero_alt }}">
+        </div>
+        <div class="portfolio-board__copy">
+          <p class="project__kicker">{{ project.category }}</p>
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.summary }}</p>
+          {% if project.facts %}
+            <ul class="fact-list" aria-label="{{ project.title }} facts">
+              {% for fact in project.facts %}
+                <li>{{ fact }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          <button class="project-toggle project-toggle--desktop" type="button" aria-expanded="false" aria-controls="details-{{ project.slug }}">
+            <span>Expand details</span>
+          </button>
+        </div>
+        <button class="project-toggle project-toggle--mobile" type="button" aria-expanded="false" aria-controls="details-{{ project.slug }}">
+          <span>Expand details</span>
+        </button>
+        <div class="project-details__content" id="details-{{ project.slug }}" hidden>
+          <div>
+            {{ project.content }}
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</main>
+
+<script>
+  document.querySelectorAll(".project-toggle").forEach((button) => {
+    button.addEventListener("click", () => {
+      const board = button.closest(".portfolio-board");
+      const content = document.getElementById(button.getAttribute("aria-controls"));
+      const willOpen = content.hidden;
+
+      content.hidden = !willOpen;
+      board.querySelectorAll(".project-toggle").forEach((toggle) => {
+        toggle.setAttribute("aria-expanded", String(willOpen));
+        toggle.querySelector("span").textContent = willOpen ? "Collapse details" : "Expand details";
+      });
+    });
+  });
+</script>
+
+<section id="blog" class="blog" aria-labelledby="blog-title">
+  <div class="section-heading">
+    <p class="eyebrow">Blog</p>
+    <h2 id="blog-title">Writing templates</h2>
+    <p>
+      Example posts showing the format for occasional writing. Duplicate one, change the date and title,
+      then write in Markdown.
+    </p>
+  </div>
+
+  <div class="blog-grid">
+    {% for post in site.posts limit:4 %}
+      <article class="blog-card">
+        {% if post.image %}
+          <img src="{{ post.image | relative_url }}" alt="{{ post.image_alt | default: post.title }}">
+        {% endif %}
+        <div>
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d %b %Y" }}</time>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p>{{ post.excerpt | strip_html | truncate: 150 }}</p>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="about" class="about" aria-labelledby="about-title">
+  <div>
+    <p class="eyebrow">About</p>
+    <h2 id="about-title">Design engineering, practical systems, and technical communication.</h2>
+  </div>
+  <div class="about__copy">
+    <p>
+      Final-year BSc Design Engineering student at Bournemouth University. Interests and experience include
+      CAD modelling, GD&amp;T/MBD, DFM/A/S, electronics, basic programming, MBSE, CAM, CMM metrology,
+      product rendering, video editing, FPV drones, and prototype development.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:{{ site.author.email }}">Email</a>
+      <a href="{{ site.author.linkedin }}">LinkedIn</a>
+    </div>
+  </div>
+</section>
