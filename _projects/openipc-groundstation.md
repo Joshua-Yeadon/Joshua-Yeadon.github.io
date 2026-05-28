@@ -44,12 +44,3 @@ Radxa Zero 3W, Wi-Fi radio cards, USB hub, 5V regulation, capacitors, SMA pigtai
   <img src="/assets/images/project-details/openipc-build.jpg" alt="Partially assembled OpenIPC groundstation electronics in a black 3D printed case">
   <figcaption>Physical build check: wiring, connectors, and board heights are the real constraints.</figcaption>
 </figure>
-
-## Related WIP
-
-The RubyFPV home icon plugin is a related software-side experiment: projecting a home or POI marker onto the live camera view rather than only showing an arrow and distance.
-
-<figure>
-  <img src="/assets/images/project-details/rubyfpv-plugin-context.jpg" alt="FPV image comparison showing analog FPV and DJI O4 digital FPV">
-  <figcaption>Motivation: open systems can gain useful high-level interface features without becoming closed ecosystems.</figcaption>
-</figure>
